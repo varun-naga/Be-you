@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Navigate } from "react-router-dom";
 import { addItemToCart, removeItemFromCart } from "./helper/cartHelper";
 import { CardMedia } from "@mui/material";
@@ -58,15 +58,17 @@ const Cards = ({
   const showRemoveFromCart = removeFromCart => {
     return (
       removeFromCart && (
+        <Fragment>
         <button
           onClick={() => {
             removeItemFromCart(product._id);
             setReload(!reload);
           }}
-          className="btn btn-block btn-outline-danger mt-2 mb-2"
+          className="btn btn-block btn-outline-danger mt-4 mb-4"
+          
         >
-          Remove from cart
-        </button>
+          Remove
+        </button></Fragment>
       )
     );
   };
@@ -88,9 +90,10 @@ const Cards = ({
         </Typography>
       </CardContent>
       <CardActions>
-          <div className="col-8">{showAddToCart(addtoCart)}</div>
-          <div className="col-12">{showRemoveFromCart(removeFromCart)}</div>
-          <Button size="small">Share</Button>
+        
+          {addToCart?<div className="col-8">{showAddToCart(addtoCart)}</div>:null}
+          {removeFromCart?<div className="col-8">{showRemoveFromCart(removeFromCart)}</div>:null}
+          
       </CardActions>
       
     </Card>

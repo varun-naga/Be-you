@@ -1,0 +1,8 @@
+fileignoreconfig:
+- filename: package-lock.json
+  checksum: a84ad64c413a87a6210407e278f9e1493be0ede03fd820cb520a1e0c38f2aa7e
+- filename: src/core/Cart.js
+  checksum: 3edc068bf467b6d10c1b30475d9718fe366a7e3ee1870c3ef10fc1184b6212f2
+- filename: src/admin/ManageCategories.js
+  checksum: 31b5651d7b1970be166527879c39a441123dda4e8ab6bc24821a5d21f1e4686c
+version: ""

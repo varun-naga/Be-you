@@ -32,7 +32,7 @@ const Signup = () => {
           setValues({
             ...values,
             name: "",
-            email: "",
+            email: "", 
             password: "",
             error: "",
             success: true

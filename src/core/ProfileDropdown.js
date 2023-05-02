@@ -41,14 +41,14 @@ const items=[
         key:'5',
         danger: true,
         label:(
-          isAuthenticated()?(
+          isAuthenticated().user?(
           <Link variant="body1" color="error"  href="/" onClick={()=>{signout()}} underline="none" >Signout</Link>
          ):null
          ),
       },
     ]
 
-function ProfileDropdown () {
+function ProfileDropdown ({isAuthenticated}) {
   return(
   
   <Dropdown menu={{items,selectable: true}} size={{ width: 240 }}>

@@ -6,6 +6,7 @@ import { createOrder } from "./helper/orderHelper";
 import { isAuthenticated } from "../auth/helper";
 
 import DropIn from "braintree-web-drop-in-react";
+import { Button } from "@mui/material";
 
 const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
   const [info, setInfo] = useState({
@@ -40,9 +41,10 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
               options={{ authorization: info.clientToken }}
               onInstance={instance => (info.instance = instance)}
             />
-            <button className="btn btn-block btn-success" onClick={onPurchase}>
+            <Button onClick={onPurchase} variant="contained" fullWidth style={{marginLeft:"30px"}}>
               Buy
-            </button>
+            </Button>
+            
           </div>
         ) : (
           <h3>Please login or add something to cart</h3>
@@ -53,11 +55,14 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
 
   useEffect(() => {
     getToken(userId, token);
+    loadCart()
   }, []);
 
   const onPurchase = () => {
     setInfo({ loading: true });
     let nonce;
+    console.log(info)
+
     let getNonce = info.instance.requestPaymentMethod().then(data => {
       nonce = data.nonce;
       const paymentData = {
@@ -68,8 +73,15 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
         .then(response => {
           setInfo({ ...info, success: response.success, loading: false });
           console.log("PAYMENT SUCCESS");
-          //TODO: empty the cart
-          //TODO: force reload
+          const orderData={
+            products:products,
+            transaction_id:response.transaction.id,
+            amount:response.transaction.amount
+          }
+          createOrder(userId,token,orderData)
+          cartEmpty()
+         
+          setReload(!reload)
         })
         .catch(error => {
           setInfo({ loading: false, success: false });
@@ -88,7 +100,7 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
 
   return (
     <div>
-      <h3>Your bill is {getAmount()} $</h3>
+      <h3>Your bill is Rs. {getAmount()}</h3>
       {showbtdropIn()}
     </div>
   );

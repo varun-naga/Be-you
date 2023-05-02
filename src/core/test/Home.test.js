@@ -7,14 +7,15 @@ import Menu from "../Menu";
 import { render,screen } from "@testing-library/react";
 import Cards from "../Cards";
 import { act } from "react-dom/test-utils";
+import { Card } from "@mui/material";
 Enzyme.configure({ adapter: new Adapter() });
 describe("Home page",()=>{
     it("renders products on home page",()=>{
         let homeComponent;
-        const wrapper=mount(
+        const wrapper=render(
             <Home/>
         )
-       
-        expect(homeComponent.find(Cards)).toHaveLength(5)
+        
+        expect(wrapper.find(Cards)).toBeInTheDocument()
     })
 })

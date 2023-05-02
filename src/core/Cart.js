@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
 import { API } from "../backend";
-import Base from "./Base";
-import Card from "./Cards";
+import Cards from "./Cards";
 import { loadCart } from "./helper/cartHelper";
 import Paymentb from "./Paymentb";
 
@@ -16,18 +15,22 @@ const Cart = () => {
 
   const loadAllProducts = products => {
     return (
-      <div>
+      <div className="row" style={{marginTop:"5px"}}>
         <h2>This section is to load products</h2>
-        {products.map((product, index) => (
-          <Card
-            key={index}
-            product={product}
-            removeFromCart={true}
-            addtoCart={false}
-            setReload={setReload}
-            reload={reload}
-          />
-        ))}
+        {products.map((product, index) => {
+          return (
+            <div key={index} className="col-4 mb-4">
+              <Cards 
+                product={product} 
+                key={index}
+                removeFromCart={true}
+                addtoCart={false}
+                setReload={setReload}
+                reload={reload} 
+            />
+            </div>
+          );
+          })}
       </div>
     );
   };
@@ -40,9 +43,9 @@ const Cart = () => {
   };
 
   return (
-    <Base title="Cart Page" description="Ready to checkout">
+   
       <div className="row text-center">
-        <div className="col-6">
+        <div className="col-12">
           {products.length > 0 ? (
             loadAllProducts(products)
           ) : (
@@ -53,7 +56,6 @@ const Cart = () => {
           <Paymentb products={products} setReload={setReload} />
         </div>
       </div>
-    </Base>
   );
 };
 

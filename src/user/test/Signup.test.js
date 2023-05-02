@@ -19,7 +19,7 @@ describe('SignUp page',()=>{
         
     });
     it("renders success message after successful Signup",()=>{
-        
+        render(<Signup/>)
         const mockEvent = { target: { value: 'summer' } };
         inputBox.simulate('change', mockEvent);
          // add value to input box

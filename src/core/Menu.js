@@ -1,16 +1,17 @@
 import { Avatar,Link } from "@mui/material";
 import React, { Fragment, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate } from "react-router-dom";
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import Men from "./Categories/Men";
 import Women from "./Categories/Women";
 import Kids from "./Categories/Kids";
 import Profile from "../user/Profile";
-import ProfileDropdown from "./ProfileDropdown";
+import ProfileDropdown from "./ProfileDropdown"; 
+
 
 const Menu = ({isAuthenticated,signout}) => (
-
-  <div style={{height:"55px", backgroundColor: 'black'}}>
+<BrowserRouter>
+  <div style={{height:"55px", backgroundColor: 'black',position: 'sticky',top: 0}}>
       <Link variant="body1" href="/" style={{marginLeft:"20px",marginTop:"10px"}} underline="none">Home</Link>
       <Men />
       <Women />
@@ -29,8 +30,9 @@ const Menu = ({isAuthenticated,signout}) => (
         </Fragment>
       )}
       {<h2 className="display-4 text-white" style={{marginLeft:"780px",marginTop:"-50px"}}>Be You</h2>}
-      {isAuthenticated() &&(<ProfileDropdown/>)}
+      {isAuthenticated() &&(<ProfileDropdown isAuthenticated={isAuthenticated}/>)}
   </div>
+  </BrowserRouter>
 );
 
 export default Menu;

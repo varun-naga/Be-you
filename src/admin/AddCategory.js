@@ -11,14 +11,6 @@ const AddCategory = ({isAuthenticated}) => {
 
   const { user, token } = isAuthenticated();
 
-  const goBack = () => (
-    <div className="mt-5">
-      <Link className="btn btn-sm btn-success mb-3" to="/admin/dashboard">
-        Admin Home
-      </Link>
-    </div>
-  );
-
   const handleChange = event => {
     setError("");
     setName(event.target.value);
@@ -70,7 +62,7 @@ const AddCategory = ({isAuthenticated}) => {
           inputProps={{ "data-testid": "content-input" }}
           style={{maxWidth:"1500px"}}
           />
-          <div style={{marginTop:"50px"}}>
+          <div style={{marginTop:"30px"}}>
         <button onClick={onSubmit} className="btn btn-outline-info">
           Create Category
         </button>
@@ -86,7 +78,11 @@ const AddCategory = ({isAuthenticated}) => {
           {successMessage()}
           {warningMessage()}
           {myCategoryForm()}
-          {/* {goBack()} */}
+          <div className="mt-5">
+             {/* <Link className="btn btn-sm btn-success mb-3" href="/admin/dashboard">
+             Admin Home
+             </Link> */}
+          </div>
         </div>
       </div>
       

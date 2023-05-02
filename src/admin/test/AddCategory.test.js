@@ -35,13 +35,13 @@ describe('Add Category', () => {
     //   expect(wrapper.text()).to.equal('Category created successfully');
       //expect(wrapper.find())
       const isAuthenticated=jest.fn().mockReturnValue({user:{"name":"varun","email":"varunmulugu2000@gmail.com","role":1},token:"rfhggg"})
-      const addCategoryComponent=render(<AddCategory isAuthenticated={isAuthenticated}/>)
-      const input=addCategoryComponent.getByTestId('content-input')
-      const button=addCategoryComponent.getByRole('button')
+      render(<AddCategory isAuthenticated={isAuthenticated}/>)
+      const input=screen.getByTestId('content-input')
+      const button=screen.getByRole('button')
 
-      fireEvent.change(input,{target:{value:'winter'}})
+      fireEvent.change(input,{target:{value:"winter"}})
       fireEvent.click(button)
-      expect(addCategoryComponent.getByText('Category created successfully')).toBeInTheDocument()
+      expect(screen.getByText('Category created successfully')).toBeInTheDocument()
 
   })
 })
